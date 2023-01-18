@@ -6,23 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chick Chick - Барбершоп</title>
+    <link rel="stylesheet" href="style/style.css">
 </head>
 
 <body>
     <header class="header">
         <div class="container">
-            <img class="header__logo" src="img/logo.svg" alt="логотип барбершопа Chick-Chick">
-            <nav class="header__navigation navigation">
-                <ul class="navigation__list">
-                    <li class="navigation__item">
-                        <a href="#price" class="navigation__link">Cтоимость услуг</a>
-                    </li>
-                    <li class="navigation__item">
-                        <a href="#about" class="navigation__link">О нас</a>
-                    </li>
-                </ul>
-            </nav>
-            <a href="#reserve" class="header__link main-link">Записаться</a>
+            <div class="header__container">
+                <img class="header__logo" src="img/logo.svg" alt="логотип барбершопа Chick-Chick" width="70"
+                    height="40">
+                <nav class="header__navigation navigation">
+                    <ul class="navigation__list">
+                        <li class="navigation__item">
+                            <a href="#price" class="navigation__link">Cтоимость услуг</a>
+                        </li>
+                        <li class="navigation__item">
+                            <a href="#about" class="navigation__link">О нас</a>
+                        </li>
+                    </ul>
+                </nav>
+                <a href="#reserve" class="header__link main-link">Записаться</a>
+            </div>
         </div>
     </header>
 
@@ -113,14 +117,14 @@
         </section>
         <section class="about" id="about">
             <div class="container">
-                <h2 class="about__title">Мы помогаем всем мужчинам 
+                <h2 class="about__title">Мы помогаем всем мужчинам
                     выглядеть уверенно</h2>
                 <p class="about__description">
-                    Сhik chik — это намного больше, чем просто барберная. 
-                    Это место, где вам помогут найти свой собственный, 
-                    неповторимый стиль. Стоит довериться нашим мастерам один раз, и, 
-                    поверьте, новый образ не оставит Вас равнодушным. Мужские стрижки 
-                    и опасное бритье — это наш профиль, 
+                    Сhik chik — это намного больше, чем просто барберная.
+                    Это место, где вам помогут найти свой собственный,
+                    неповторимый стиль. Стоит довериться нашим мастерам один раз, и,
+                    поверьте, новый образ не оставит Вас равнодушным. Мужские стрижки
+                    и опасное бритье — это наш профиль,
                     и мы уверены, что наши барберы делают это лучше всех.
                 </p>
                 <ul class="about__list">
@@ -189,7 +193,7 @@
                         </fieldset>
                         <fieldset class="reserve__fieldset">
                             <legend class="reserve__legend">Специалист</legend>
-                            
+
                             <label class="radio">
                                 <input class="radio__input" type="radio" name="spec">
                                 <span class="radio__label">Артур Земцов</span>
@@ -279,10 +283,10 @@
                                     <span class="radio__label">19:00-20:30</span>
                                 </label>
                             </fieldset>
-                            
+
                         </fieldset>
                     </div>
-                    <button class="reserve__btn main-link">Записаться</button>
+                    <button class="reserve__btn main-link" disabled>Записаться</button>
                 </form>
             </div>
         </section>
@@ -291,7 +295,7 @@
     <footer>
         <div class="container">
             <img class="footer__logo" src="img/logo.svg" alt="логотип барбершопа Chick-Chick">
-            
+
             <nav class="footer__navigation navigation">
                 <ul class="navigation__list">
                     <li class="navigation__item">
