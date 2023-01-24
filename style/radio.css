@@ -23,7 +23,7 @@
 .radio__input:focus + .radio__label, 
 .radio__input:checked + .radio__label {
     color: #241D1C;
-    background: #F6F3E3;
+    background-color: #F6F3E3;
 }
 
 .radio__label_spec {
