@@ -29,6 +29,8 @@ const startSlider = () => {
         }
     }
 
+    checkSlider()
+
     const nextSlide = () => {
         sliderItems[activeSlide].classList.remove('slider__item_active')
         position = -sliderItems[0].clientWidth * activeSlide
