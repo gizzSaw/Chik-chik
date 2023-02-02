@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="style/about.css">
     <link rel="stylesheet" href="style/reserve.css">
     <link rel="stylesheet" href="style/radio.css">
+    <link rel="stylesheet" href="style/footer.css">
     <script src="js/script.js"></script>
 </head>
 
@@ -147,7 +148,7 @@
                     </li>
                     <li class="about__item about__item_master">
                         <h3 class="about__item-title">Мастера бород и усов</h3>
-                        <p class="about__item-desription">Мы заботливо уложим вашу бороду и&nbspусы</p>
+                        <p class="about__item-desription">Мы заботливо уложим вашу бороду и&nbsp;усы</p>
                     </li>
                     <li class="about__item about__item_guarantee">
                         <h3 class="about__item-title">Гарантия качества</h3>
@@ -305,25 +306,33 @@
         </section>
     </main>
 
-    <footer>
+    <footer class="footer">
         <div class="container">
-            <img class="footer__logo" src="img/logo.svg" alt="логотип барбершопа Chick-Chick">
+            <div class="footer__container">
+                <img class="footer__logo" src="img/logo.svg" alt="логотип барбершопа Chick-Chick">
 
-            <nav class="footer__navigation navigation">
-                <ul class="navigation__list">
-                    <li class="navigation__item">
-                        <a href="#price" class="navigation__link">Cтоимость услуг</a>
+                <div class="footer__navigation navigation">
+                    <ul class="navigation__list">
+                        <li class="navigation__item">
+                            <a href="#price" class="navigation__link">Cтоимость услуг</a>
+                        </li>
+                        <li class="navigation__item">
+                            <a href="#about" class="navigation__link">О нас</a>
+                        </li>
+                    </ul>
+                </div>
+                <ul class="footer__developers">
+                    <li class="footer__developer">
+                        Designer: <a class="footer__developer-link" href="https://t.me/Mrshmallowww">Anastasia Ilina</a>
                     </li>
-                    <li class="navigation__item">
-                        <a href="#about" class="navigation__link">О нас</a>
+                    <li class="footer__developer">
+                        Developer: <a class="footer__developer-link" href="https://t.me/HelpDeskSava">Saveliy Kononov</a>
                     </li>
                 </ul>
-            </nav>
-            <ul class="footer__autor">
-                <li class="footer__autor-item">Designer: Anastasia Ilina</li>
-                <li class="footer__autor-item">Developer: Saveliy Kononov</li>
-            </ul>
-            <div class="footer__copyright">© chik chik, 2023</div>
+                <p class="footer__copyright">
+                    © chik chik, 2023
+                </p>
+            </div>
         </div>
     </footer>
 </body>
