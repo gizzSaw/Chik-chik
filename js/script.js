@@ -1,4 +1,4 @@
-const API_URL = 'https://round-reflective-uncle.glitch.me/api'
+const API_URL = 'https://round-reflective-uncle.glitch.me/'
 
 /*
 Доступные методы:
@@ -105,19 +105,19 @@ const renderPrice = (wrapper, data) => {
         `
         wrapper.append(priceItem)
     })
-
-    
-
-    /* 
-    <li class="price__item">
-        <span>Стрижка ножницами</span>
-        <span class="price__item-count">2500 руб</span>
-    </li>
-    */
 }
 
 const renderService = (wrapper, data) => {
-    
+    const labels = data.map(item => {
+        const label = document.createElement('label')
+        label.classList.add('radio')
+        label.innerHTML = `
+            <input class="radio__input" type="radio" name="service" value="${item.id}">
+            <span class="radio__label">${item.name}</span>
+        `
+        return label
+    })
+    wrapper.append(...labels)
 }
 
 const initService = () => {
@@ -129,7 +129,7 @@ const initService = () => {
     reserveFieldsetService.innerHTML = `<legend class="reserve__legend">Услуга</legend>`
     addPreload(reserveFieldsetService)
 
-    fetch(API_URL)
+    fetch(`${API_URL}/api`)
         .then(response =>  response.json())
         .then(data => {
             renderPrice(priceList, data)
@@ -140,13 +140,56 @@ const initService = () => {
             renderService(reserveFieldsetService, data)
             removePreload(reserveFieldsetService)
         })
+}
+
+const addDisabled = (arr) => {
+    arr.forEach((elem) => {
+        elem.disabled = true
+    })
+}
+
+const removeDisabled = (arr) => {
+    arr.forEach((elem) => {
+        elem.disabled = false
+    })
+}
+
+const renderSpec = (wrapper, data) => {
+    const labels = data.map(item => {
+        const label = document.createElement('label')
+        label.classList.add('radio')
+        label.innerHTML = `
+        <input class="radio__input" type="radio" name="spec" value="${item.id}">
+        <span class="radio__label radio__label_spec" style="--bg-image: url(${API_URL}${item.img})">${item.name}</span>
+        `
+        return label
+    })
+    wrapper.append(...labels)
+}
+
+const initReserve = () => {
+    const reserveForm = document.querySelector('.reserve__form')
+    const {fieldspec,fielddate,fieldmonth,fieldday,fieldtime,btn} = reserveForm
     
-    
+    addDisabled([fieldspec,fielddate,fieldmonth,fieldday,fieldtime,btn])
+
+    reserveForm.addEventListener('change', async event => {
+        const { target } = event
+        console.log('target ', target)
+        if (target.name === 'service') {
+            const response = await fetch(`${API_URL}/api?service=${target.value}`)
+            const data = await response.json()
+            console.log('data ',data)
+
+            renderSpec(fieldspec, data)
+        }
+    })
 }
 
 const init = () => {
     initSlider()
     initService()
+    initReserve()
 }
 
 window.addEventListener('DOMContentLoaded', init)
