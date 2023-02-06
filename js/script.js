@@ -167,6 +167,36 @@ const renderSpec = (wrapper, data) => {
     wrapper.append(...labels)
 }
 
+const renderMonth = (wrapper, data) => {
+    const labels = data.map(month => {
+        const label = document.createElement('label')
+        label.classList.add('radio')
+        label.innerHTML = `
+        <input class="radio__input" type="radio" name="month" value="${month}">
+        <span class="radio__label">${new Intl.DateTimeFormat('ru-RU', {
+            month: 'long'
+        }).format(new Date(month))}</span>
+        `
+        return label
+    })
+    wrapper.append(...labels)
+}
+
+const renderDay = (wrapper, data, month) => {
+    const labels = data.map(day => {
+        const label = document.createElement('label')
+        label.classList.add('radio')
+        label.innerHTML = `
+        <input class="radio__input" type="radio" name="day" value="${day}">
+        <span class="radio__label">${new Intl.DateTimeFormat('ru-RU', {
+            month: 'long', day: 'numeric'
+        }).format(new Date(`${month}/${day}`))}</span>
+        `
+        return label
+    })
+    wrapper.append(...labels)
+}
+
 const initReserve = () => {
     const reserveForm = document.querySelector('.reserve__form')
     const {fieldspec,fielddate,fieldmonth,fieldday,fieldtime,btn} = reserveForm
@@ -177,11 +207,37 @@ const initReserve = () => {
         const { target } = event
         console.log('target ', target)
         if (target.name === 'service') {
+            addDisabled([fieldspec, fielddate, fieldmonth, fieldday, fieldtime, btn])
+            fieldspec.innerHTML = '<legend class="reserve__legend">Специалист</legend>'
+            addPreload(fieldspec)
             const response = await fetch(`${API_URL}/api?service=${target.value}`)
             const data = await response.json()
-            console.log('data ',data)
-
             renderSpec(fieldspec, data)
+            removePreload(fieldspec)
+            removeDisabled([fieldspec])
+        }
+
+        if (target.name === 'spec') {
+            addDisabled([fielddate, fieldmonth, fieldday, fieldtime, btn])
+            addPreload(fieldmonth)
+            const response = await fetch(`${API_URL}/api?spec=${target.value}`)
+            const data = await response.json()
+            fieldmonth.textContent = ''
+            renderMonth(fieldmonth, data)
+            removePreload(fieldmonth)
+            removeDisabled([fielddate, fieldmonth])
+        }
+
+        if (target.name === 'month') {
+            addDisabled([fieldday, fieldtime, btn])
+            addPreload(fieldday)
+            const response = await fetch(
+                `${API_URL}/api?spec=${reserveForm.spec.value}&month=${reserveForm.month.value}`)
+            const data = await response.json()
+            fieldday.textContent = ''
+            renderDay(fieldday, data, reserveForm.month.value)
+            removePreload(fieldday)
+            removeDisabled([fieldday])
         }
     })
 }
