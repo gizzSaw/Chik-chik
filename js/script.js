@@ -212,13 +212,13 @@ const renderTime = (wrapper, data) => {
 
 const initReserve = () => {
     const reserveForm = document.querySelector('.reserve__form')
-    const {fieldspec,fielddate,fieldmonth,fieldday,fieldtime,btn} = reserveForm
+    const {fieldservice, fieldspec,fielddate,fieldmonth,fieldday,fieldtime,btn} = reserveForm
     
+
     addDisabled([fieldspec,fielddate,fieldmonth,fieldday,fieldtime,btn])
 
     reserveForm.addEventListener('change', async event => {
         const { target } = event
-        console.log('target ', target)
         if (target.name === 'service') {
             addDisabled([fieldspec, fielddate, fieldmonth, fieldday, fieldtime, btn])
             fieldspec.innerHTML = '<legend class="reserve__legend">Специалист</legend>'
@@ -268,6 +268,42 @@ const initReserve = () => {
         if (target.name === 'time') {
             removeDisabled([btn])
         }
+    })
+
+    reserveForm.addEventListener('submit',  async event => {
+        event.preventDefault()
+
+        const formData = new FormData(reserveForm)
+        const json = (JSON.stringify(Object.fromEntries(formData)))
+
+        const response = await fetch(`${API_URL}api/order`, {
+            method: 'post',
+            body: json,
+        })
+        
+        const data = await response.json()
+        
+
+        addDisabled([
+            fieldservice,
+            fieldspec,
+            fielddate,
+            fieldmonth,
+            fieldday,
+            fieldtime,
+            btn
+        ])
+
+        const p = document.createElement('p')
+        p.textContent = `
+            Спасибо за бронь #${data.id}!
+            Ждём вас ${new Intl.DateTimeFormat('ru-RU', {
+                month: 'long',
+                day: 'numeric',
+            }).format(new Date(`${data.month}/${data.day}`))}
+            время ${data.time}`
+
+        reserveForm.append(p)
     })
 }
 
